@@ -7,11 +7,13 @@ class GooglePage < BasePage
   button      :the_submit_button, name: "btnK"
   text_field  :the_search_text_field, name: "q"
 
+  page_url FigNewton.google_url
+
   # This creates a method that allows us to poll for the expected title upon entering a page.
   wait_for_expected_title /Google/
 
   # This creates a method that allows us to poll for an expected element upon entering a page.
-  expected_element_visible :the_submit_button
+  expected_element_visible :the_search_text_field
 
   # This method combines the actions for our user on the search page.
   #
