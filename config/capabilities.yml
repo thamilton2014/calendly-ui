@@ -1,0 +1,47 @@
+#
+# This YAML file contains the primary key/value pairs needed for our browser instance.
+  #
+  <%
+  directory = "#{Dir.pwd}/results/tmp"
+  hub_address = "http://localhost:4444/wd/hub"
+  browser = "chrome"
+  %>
+
+---
+
+#
+# Description:
+#   https://github.com/SeleniumHQ/selenium/wiki/DesiredCapabilities
+#
+base: &base
+  # The extra : at the begining of the word allow it to be parsed correctly by Watir as a symbol.
+  :browser: <%= browser %>
+  :url: <%= hub_address %>
+  loggingPrefs:
+    driver: ALL
+    server: ALL
+    browser: ALL
+    performance: ALL
+
+#
+# Description:
+#   https://sites.google.com/a/chromium.org/chromedriver/capabilities
+#
+chrome: &chrome
+  # https://peter.sh/experiments/chromium-command-line-switches/
+  chromeOptions:
+    args:
+      - start-maximized
+      - verbose
+      - disable-notifications
+    prefs:
+      download:
+        default_directory: "<%= directory %>"
+        directory_upgrade: true
+  perfLoggingPrefs:
+    enableNetwork: true
+    enablePage: true
+    traceCategories: browser,devtools.timeline,devtools
+default:
+  <<: *base
+  <<: *<%= browser %>
