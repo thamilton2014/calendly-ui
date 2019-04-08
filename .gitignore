@@ -1,0 +1,7 @@
+/results/*.log
+/results/junit/*.xml
+/results/json/*.json
+/results/html/*.html
+/results/screenshots/*.png
+/coverage
+*.lock
